@@ -23,9 +23,7 @@ CREATE TABLE PROFESOR(
 	Carrera varchar(40) not null,
 	Area varchar(20) not null,
 	correo varchar(40) not null,
-	constraint ck_cedula check (Cedula > 0),
-	constraint ck_nivel check (Nivel_max in 
-							   ('Licenciatura', 'Maestria', 'Doctorado'))
+	constraint ck_cedula check (Cedula > 0)
 );
 
 CREATE TABLE CURSO(
@@ -35,13 +33,11 @@ CREATE TABLE CURSO(
 	FechaInicio date not null,
 	FechaFin date not null,
 	Id_profRespon int not null,
-	DuracionCurso int not null,
 	Aula varchar(2) not null,
 	HoraInicio time not null,
 	HoraFin time not null,
 	estatus boolean default false,
 	Constraint ck_idprofres check (Id_profRespon > 0),
-	Constraint ck_duracion check (DuracionCurso > 0),
 	Constraint fk_idProdRes foreign key (Id_profRespon)
 	references Profesor(id_profesor)
 );
@@ -67,16 +63,23 @@ insert into profesor ("nombre", "ap_paterno", "ap_materno", "cedula",
 							'erikjr_12@hotmail.com');
 
 insert into curso ("nombrecurso", "fechainicio", "fechafin", "id_profrespon",
-				  "duracioncurso", "aula", "horainicio", "horafin") values (
+				  "aula", "horainicio", "horafin") values (
 				  'Induccion a las nuevas tecnologias', '2019/07/01', '2019/08/02',
-				  2, 75, 'A3', '08:00:00', '11:00:00');
+				  1, 'A3', '08:00:00', '11:00:00');
 insert into curso ("nombrecurso", "fechainicio", "fechafin", "id_profrespon",
-				  "duracioncurso", "aula", "horainicio", "horafin") values (
+				  "aula", "horainicio", "horafin") values (
 				  'Desarrrollo Laboral', '2019/07/01', '2019/08/02',
-				  3, 50, 'I9', '09:30:00', '11:30:00');
+				  2, 'I9', '09:30:00', '11:30:00');
 				  
 select * from curso;
 select * from profesor;
 
 insert into profesor_curso ("id_profesor", "id_curso") values (2, 2);
+select * from profesor_curso;
+ 
+select count(*) from profesor_curso where id_curso = 1;
+
+update curso set estatus = false where id_curso = 2;
+
+delete from profesor_curso where id_profesor = 6;
 select * from profesor_curso;
