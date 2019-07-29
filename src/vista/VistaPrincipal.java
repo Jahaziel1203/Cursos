@@ -29,14 +29,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         Icon fondo = new ImageIcon(imagen.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT));
         Imagen.setIcon(fondo);
         cerrar();
-        this.setBounds(200, 200, 420, 360);
-        btnAgregarCurso.setLocation(24, 240);
-        btnAgregarProfesor.setLocation(225,240);
+        this.setBounds(200, 200, 475, 420);
+        //btnAgregarCurso.setLocation(24, 240);
+        //btnAgregarProfesor.setLocation(225,240);
+        btnInscribir.setSize(140, 30);
         //btnConsultarCurso.setSize(127, 32);
         //btnConsultarProfesor.setSize(150,32);
         this.repaint();
-        this.setVisible(true);
-         
+        this.setVisible(true);    
     }
     
     public void cerrar(){
@@ -70,6 +70,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnAgregarCurso = new javax.swing.JButton();
         btnAgregarProfesor = new javax.swing.JButton();
         Imagen = new javax.swing.JLabel();
+        btnInscribir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -81,7 +82,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("ELIGE LA OPCIÓN QUE DESEES REALIZAR");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 380, 30);
+        jLabel1.setBounds(40, 10, 380, 30);
 
         btnAgregarCurso.setText("Agregar Curso");
         btnAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -90,16 +91,20 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregarCurso);
-        btnAgregarCurso.setBounds(20, 240, 120, 32);
+        btnAgregarCurso.setBounds(10, 330, 120, 32);
 
         btnAgregarProfesor.setText("Agregar Profesor");
         getContentPane().add(btnAgregarProfesor);
-        btnAgregarProfesor.setBounds(220, 240, 140, 32);
+        btnAgregarProfesor.setBounds(150, 330, 140, 32);
 
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ESCUELA.png"))); // NOI18N
         Imagen.setText("jLabel2");
         getContentPane().add(Imagen);
-        Imagen.setBounds(28, 40, 330, 180);
+        Imagen.setBounds(30, 50, 400, 260);
+
+        btnInscribir.setText("Inscribir Profesor");
+        getContentPane().add(btnInscribir);
+        btnInscribir.setBounds(310, 330, 130, 32);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,6 +120,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
       
 		btnAgregarProfesor.addActionListener(c);
 		btnAgregarProfesor.setActionCommand("Agregar Profesor");
+                
+                btnInscribir.addActionListener(c);
+                btnInscribir.setActionCommand("Inscribir Profesor");
                 
                 //btnConsultarCurso.addActionListener(c);
 		//btnConsultarCurso.setActionCommand("Consultar Curso");
@@ -168,6 +176,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Imagen;
     private javax.swing.JButton btnAgregarCurso;
     private javax.swing.JButton btnAgregarProfesor;
+    private javax.swing.JButton btnInscribir;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

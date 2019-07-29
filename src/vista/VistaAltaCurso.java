@@ -7,13 +7,11 @@ package vista;
 
 import Controlador.ControladorCurso;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +42,9 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         this.setBounds(200, 200, 700, 500);
         
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(15, 205, 650, 190);
+        jScrollPane1.setBounds(15, 200, 650, 190);
+        
+        btnHoraFin.setSize(93,32);
         
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.getColumnModel().getColumn(1).setMaxWidth(80);
@@ -94,12 +94,6 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         profResponsable = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        horaInicio = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        horaFin = new javax.swing.JComboBox<>();
-        minutoInicio = new javax.swing.JComboBox<>();
-        minutoFin = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         aulas = new javax.swing.JComboBox<>();
         btnAgregar = new javax.swing.JButton();
@@ -107,10 +101,13 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         fechaFin = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lblHoraInicio = new javax.swing.JLabel();
+        lblHoraFin = new javax.swing.JLabel();
+        btnHoraInicio = new javax.swing.JButton();
+        btnHoraFin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta de un Curso");
-        setPreferredSize(new java.awt.Dimension(585, 430));
 
         btnEliminar.setText("Eliminar Curso");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,23 +136,6 @@ public class VistaAltaCurso extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Hora Inicio:");
-
-        horaInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18" }));
-
-        jLabel8.setText("Hora Fin:");
-
-        horaFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18" }));
-        horaFin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horaFinActionPerformed(evt);
-            }
-        });
-
-        minutoInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
-
-        minutoFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
-
         jLabel6.setText("Aula:");
 
         aulas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13" }));
@@ -176,6 +156,10 @@ public class VistaAltaCurso extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha Termino:");
 
+        btnHoraInicio.setText("Hora Inicio:");
+
+        btnHoraFin.setText("Hora Fin:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,77 +172,69 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnHoraInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHoraFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblHoraInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblHoraFin, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(horaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(minutoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel6)
-                            .addGap(10, 10, 10)
-                            .addComponent(aulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addComponent(minutoFin, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(aulas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(profResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(profResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(profResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(horaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(minutoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(aulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(horaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(minutoFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(3, 3, 3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblHoraInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(aulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnHoraInicio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblHoraFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHoraFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(15, 15, 15)
+                            .addComponent(jLabel5))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(23, 23, 23)
                 .addComponent(btnAgregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -268,23 +244,22 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnEliminar)
-                        .addGap(156, 156, 156)
+                        .addGap(375, 375, 375)
                         .addComponent(btnRegresar)))
-                .addContainerGap())
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar)
                     .addComponent(btnRegresar))
@@ -305,10 +280,6 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private void aulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aulasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aulasActionPerformed
-
-    private void horaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaFinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_horaFinActionPerformed
 
     private void profResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profResponsableActionPerformed
         // TODO add your handling code here:
@@ -358,28 +329,21 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> aulas;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnHoraFin;
+    private javax.swing.JButton btnHoraInicio;
     private javax.swing.JButton btnRegresar;
     public com.toedter.calendar.JDateChooser fechaFin;
     public com.toedter.calendar.JDateChooser fechaInicio;
-    private javax.swing.JComboBox<String> horaFin;
-    private javax.swing.JComboBox<String> horaInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JComboBox<String> minutoFin;
-    private javax.swing.JComboBox<String> minutoInicio;
+    private javax.swing.JLabel lblHoraFin;
+    private javax.swing.JLabel lblHoraInicio;
     private javax.swing.JComboBox<String> profResponsable;
-    private javax.swing.JComboBox<String> profResponsable2;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre2;
     // End of variables declaration//GEN-END:variables
 
     public void conectarControlador(ControladorCurso c) {
@@ -400,6 +364,12 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         //To change body of generated methods, choose Tools | Templates.
         btnRegresar.addActionListener((ActionListener) co);
         btnRegresar.setActionCommand("Regresar");
+        
+         btnHoraInicio.addActionListener((ActionListener) co);
+        btnHoraInicio.setActionCommand("Hora Inicio:");
+        
+        btnHoraFin.addActionListener((ActionListener) co);
+        btnHoraFin.setActionCommand("Hora Fin:");
         
         btnAgregar.addActionListener((ActionListener) co);
         btnAgregar.setActionCommand("Agregar");
@@ -426,20 +396,12 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         profResponsable.setModel(modelo);
     }
     
-    public void setHoraInicio(String hora) {
-        horaInicio.setSelectedItem(hora);
+    public void setHoraFin(String a){
+        lblHoraFin.setText(a);
     }
     
-    public void setHoraFin(String hora) {
-        horaFin.setSelectedItem(hora);
-    }
-    
-    public void setMinutoInicio(String min) {
-        minutoInicio.setSelectedItem(min);
-    }
-    
-    public void setMinutoFin(String min) {
-        minutoFin.setSelectedItem(min);
+    public void setHoraInicio(String a){
+        lblHoraInicio.setText(a);
     }
     
     public void setAulaCombo(String aula){
@@ -448,6 +410,21 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     
     public void setProfRespon(int prof) {
         profResponsable.setSelectedIndex(prof);
+    }
+    
+    
+        //Modificado *************************************************************************************************
+    public void setAulaEliminar(String num) {
+        aulas.removeItem(num);
+    }
+
+        //Modificado *************************************************************************************************    
+    public void setModeloAulas(String[] modAulas) {
+        Vector aux = new Vector(0,1);
+        for(int x = 0; x < modAulas.length; x++)
+            aux.addElement(modAulas[x]);
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(aux);
+        this.aulas.setModel(modelo);
     }
     
     //*********************************************************************************
@@ -461,23 +438,11 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     }
     
     public String getHoraInicio(){
-        Object aux = horaInicio.getSelectedItem();
-        return aux.toString();
+        return lblHoraInicio.getText();
     }
     
     public String getHoraFin(){
-        Object aux = horaFin.getSelectedItem();
-        return aux.toString();
-    }
-    
-    public String getMinutoInicio(){
-        Object aux = minutoInicio.getSelectedItem();
-        return aux.toString();
-    }
-    
-    public String getMinutofin(){
-        Object aux = minutoFin.getSelectedItem();
-        return aux.toString();
+        return lblHoraFin.getText();
     }
     
     public JTable getTabla(){

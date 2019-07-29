@@ -9,7 +9,6 @@ import Controlador.ControladorProfesor;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -70,8 +69,6 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
     private void initComponents() {
 
         btnEliminar = new javax.swing.JButton();
-        btnAsignarCurso = new javax.swing.JButton();
-        curso = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -101,18 +98,9 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
             }
         });
 
-        btnAsignarCurso.setText("Asignar Curso");
-
-        curso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        curso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cursoActionPerformed(evt);
-            }
-        });
-
         btnRegresar.setText("Menú Principal");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, new java.awt.Color(102, 102, 255)), "Datos del profesor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16), new java.awt.Color(0, 0, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, new java.awt.Color(102, 102, 255)), "Datos del profesor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 255))); // NOI18N
 
         jLabel1.setText("Nombre:");
 
@@ -195,7 +183,7 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(316, 316, 316))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,9 +209,9 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
                     .addComponent(nivelEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addGap(8, 8, 8))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,15 +223,11 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEliminar)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnAsignarCurso)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(curso, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegresar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,9 +238,7 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar)
-                    .addComponent(btnRegresar)
-                    .addComponent(curso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAsignarCurso))
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
@@ -266,10 +248,6 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void cursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cursoActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -327,11 +305,9 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnAsignarCurso;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> carrera;
-    private javax.swing.JComboBox<String> curso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -359,9 +335,6 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
         btnEliminar.addActionListener((ActionListener) c);
         btnEliminar.setActionCommand("Eliminar");
         
-        btnAsignarCurso.addActionListener((ActionListener) c);
-        btnAsignarCurso.setActionCommand("Asignar Curso");
-        
         tabla.addMouseListener(c);
     }
 
@@ -375,9 +348,6 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
         
         btnEliminar.addActionListener((ActionListener) co);
         btnEliminar.setActionCommand("Eliminar");
-        
-        btnAsignarCurso.addActionListener((ActionListener) co);
-        btnAsignarCurso.setActionCommand("Asignar Curso");
         
         tabla.addMouseListener(co);
     }
@@ -410,14 +380,6 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
         txtCorreo.setText(correo);
     }
     
-    public void setModelo(List<String> cursos){
-        Vector aux = new Vector(0,1);
-        for(int x = 0; x < cursos.size(); x++)
-            aux.addElement(cursos.get(x));
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel(aux);
-        curso.setModel(modelo);
-    }
-    
     //********************************************************************
     
     public String getNombre(){
@@ -446,17 +408,8 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
         return aux.toString();
     }
     
-    public String getCurso(){
-        Object aux = curso.getSelectedItem();
-        return aux.toString();
-    }
-    
     public String getCorreo(){
         return txtCorreo.getText();
-    }
-    
-    public int getIndiceCurso() {
-        return curso.getSelectedIndex();
     }
     
     public JTable getTabla(){
