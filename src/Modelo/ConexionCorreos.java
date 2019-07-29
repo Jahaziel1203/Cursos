@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 
 public class ConexionCorreos{
     private final String usuario = "postgres";
-    private final String contrasena = "admi";
+    private final String contrasena = "1rv1ng4rc14";
     private final String url =  "jdbc:postgresql://localhost:5432/CursosActualizacion";
     Connection con = null;
     

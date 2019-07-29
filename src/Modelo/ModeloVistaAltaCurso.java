@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import vista.VistaAltaCurso;
 /**
  *
  * @author ACER
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 public class ModeloVistaAltaCurso {
     private String  host     = "localhost";
     private String  usuario     = "postgres";
-    private String  clave       = "admi";
+    private String  clave       = "1rv1ng4rc14";
     private int     puerto      = 5432;
     private String  servidor    = "";
     private String  baseDatos;
@@ -82,11 +83,11 @@ public class ModeloVistaAltaCurso {
             datosCurso[4] = auxiliar.getNombre() + " " + auxiliar.getApPaterno() + " " + auxiliar.getApMaterno();
             datosCurso[5] = a.getAula();
             
-            EnviarCorreo en1 = new EnviarCorreo();
-            en1.correoMasivo(datosCurso);
+            //EnviarCorreo en1 = new EnviarCorreo();
+            //en1.correoMasivo(datosCurso);
             return true;
         } catch(SQLException exception) {
-            JOptionPane.showMessageDialog(null, "ERROR EN EL GUARDADO");
+            JOptionPane.showMessageDialog(null, "ERROR EN EL GUARDADO:  " + exception);
         }
         return false;
     }
@@ -153,7 +154,7 @@ public class ModeloVistaAltaCurso {
             rs = ps.executeQuery();
             if(rs.next()){
                 if(rs.getInt(1) > 0)
-                    return Color.RED;
+                    return Color.PINK;
                 else
                     return Color.GREEN;
             }
@@ -161,6 +162,164 @@ public class ModeloVistaAltaCurso {
             JOptionPane.showMessageDialog(null, exception);
         }
         return null;
+    }
+    
+    // Modificado **************************************************************************************************************************************
+    
+    //Metodo recien agregado
+    
+    /**
+     * Método en cargado de determinar que aulas se van a eliminar del 
+     * JComboBox de la interfaz VistaAltaCurso
+     * @param view
+     * @return 
+     */
+    public boolean eliminarAulas(VistaAltaCurso view) {
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        //Variables necesarias para recuperar fragmentos de la fechaInicio
+        //Esos fragmentos son el dia, mes y año
+        String diaIn = view.fechaInicio.getDate().toString().substring(8,10);
+        String mesIn = "";
+        if(view.fechaInicio.getDate().getMonth() + 1 < 10) 
+            mesIn = "0" + (view.fechaInicio.getDate().getMonth() + 1);
+        else
+            mesIn = (view.fechaInicio.getDate().getMonth() + 1) + "" ;
+        int anioIn = view.fechaInicio.getDate().getYear() + 1900;
+        //Variable para obtener la fecha de inicio en el formato necesario para la consulta
+        String fechInicio = anioIn + mesIn + diaIn;
+        
+        //Variables necesarias para recuperar fragmentos de la fechFin
+        //Esos fragmentos son el dia, mes y año
+        String diaFi = view.fechaFin.getDate().toString().substring(8,10);
+        String mesFi = "";
+        if(view.fechaFin.getDate().getMonth() + 1 < 10)
+            mesFi = "0" + (view.fechaFin.getDate().getMonth() + 1);
+        else
+            mesFi = (view.fechaFin.getDate().getMonth() + 1) + "";
+        int anioFi = view.fechaFin.getDate().getYear() + 1900;
+        //Variable para obtener la fecha de inicio en el formato necesario para la consulta
+        String fechaFin = anioFi + mesFi + diaFi;
+        
+        //En las siguientes variables se obtiene la hora en el formato necesario para la busqueda
+        String horaInicio = obtenerHora(view.getHoraInicio());
+        String horaFin = obtenerHora(view.getHoraFin());
+        
+        //Cadena que representa la consulta a realizar
+        String sqlDetermina = "SELECT aula FROM curso WHERE "
+                + "((fechainicio BETWEEN '" + fechInicio + "' AND '" + fechaFin + "') or\n" + 
+                "(fechafin BETWEEN '" + fechInicio + "' AND '"  + fechaFin + "')) and (\n" + 
+                "(horainicio BETWEEN '" + horaInicio + "' AND '" 
+                + horaFin + "') or (horafin BETWEEN '" +  horaInicio + "' AND '" + horaFin + "'));";
+        
+        try {
+            ps = getConexion().prepareStatement(sqlDetermina);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                view.setAulaEliminar(rs.getString(1));
+            }
+            
+            PreparedStatement ps2;
+            ResultSet rs2 ;
+            String sqlDetermina2 = "SELECT aula FROM curso WHERE (('" + fechInicio + 
+                    "' BETWEEN fechainicio AND fechafin) or ('" + fechaFin +
+                    "' BETWEEN fechainicio AND fechafin)) and (('" + horaInicio + "' BETWEEN "
+                    + "horainicio AND horafin) or ('" + horaFin+ "' BETWEEN horainicio AND horafin));";
+
+            ps2 = getConexion().prepareStatement(sqlDetermina2);
+            rs2 = ps2.executeQuery();
+
+            while(rs2.next()){
+                view.setAulaEliminar(rs2.getString(1));
+                System.out.println(rs2.getString(1));
+            }
+        } catch(SQLException exception) {
+            JOptionPane.showMessageDialog(null, exception);
+        }
+        return false;
+    }
+    
+    
+    /**
+     * Método encargado de regresar las cadenas hora en un formato legible para la consulta SQL
+     * 
+     * @param hora
+     * @return 
+     */
+    public String obtenerHora (String hora ) {
+        String hour = hora;
+        String h = "";
+        String mi = "";
+        String form = "";
+        for(int x = 0; x < hour.length(); x++){
+            if(x == 0 || x == 1){
+                char letra = hour.charAt(x);
+                h += letra;
+            }
+            if(x == 3 || x ==4){
+                char le = hour.charAt(x);
+                mi += le;
+            }
+            if(x == 6 || x ==7){
+                char l = hour.charAt(x);
+                form += l;
+            }
+        }
+        if(form.equals("PM")){
+            switch(h){
+                case "01":
+                    h = "13";
+                break;
+
+                case "02":
+                    h = "14";
+                break;
+
+                case "03":
+                    h = "15";
+                break;
+
+                case "04":
+                    h = "16";
+                break;
+
+                case "05":
+                    h = "17";
+                break;
+
+                case "06":
+                    h = "18";
+                break;
+
+                case "07":
+                    h = "19";
+                break;
+
+                case "08":
+                    h = "20";
+                break;
+
+                case "09":
+                    h = "21";
+                break;
+
+                case "10":
+                    h = "22";
+                break;
+
+                case "11":
+                    h = "23";
+                break;
+
+                case "12":
+                    h = "00";
+                break;
+            }
+        }
+        String hora24 = h + ":" + mi + ":" + "00";
+        return hora24;
     }
     
     public Curso selectCursoNom(Curso e){
@@ -245,7 +404,47 @@ public class ModeloVistaAltaCurso {
 	return cursos;
     }
     
-    
+    public List<Curso> listCursosAula(Curso c){
+	PreparedStatement ps;
+        //Objeto para recoger los datos devueltos por el procedimiento almacenado
+        ResultSet rs;
+        //Objeto para recorrer el resultado del procedimiento almacenado y
+        //  añadirlo a la tabla definida en la clase View
+      
+ 
+        //Cargar datos de todos los estudiantes
+        String consultaSQL = "Select id_curso, nombrecurso, fechainicio, fechafin, id_profrespon, "
+                + "aula, horainicio, horafin, estatus from public.curso;";
+
+        List<Curso> cursos = new ArrayList<Curso>();
+        try {
+            //Preparar la llamada
+            ps  = getConexion().prepareStatement(consultaSQL);
+                      
+            //Ejecutarla y recoger el resultado
+            rs  = ps.executeQuery();
+			
+            //Recorrer el resultado
+            while(rs.next()){
+		Curso a = new Curso();
+                //Añadir registro a registro en el vector
+		a.setId(rs.getInt("id_curso"));
+                a.setNombre(rs.getString("nombrecurso"));
+                a.setfInicio(rs.getString("fechainicio"));
+                a.setfFin(rs.getString("fechafin"));
+                a.setIdProf(rs.getInt("id_profrespon"));
+                a.setAula(rs.getString("aula"));
+                a.sethInicio(rs.getString("horainicio"));
+                a.sethFin(rs.getString("horafin"));
+                a.setEstado(rs.getBoolean("estatus"));
+                if(c.getAula().equals(a.getAula()))
+                    cursos.add(a);
+            }
+        } catch (SQLException exception) {
+            System.err.println("Error al CARGAR DATOS");
+        }
+	return cursos;
+    }
     
     //Modificado
     public List<String> cargarNombres(){

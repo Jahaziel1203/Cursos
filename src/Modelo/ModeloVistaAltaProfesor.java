@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ModeloVistaAltaProfesor {
     private String  host     = "localhost";
     private String  usuario     = "postgres";
-    private String  clave       = "admi";
+    private String  clave       = "1rv1ng4rc14";
     private int     puerto      = 5432;
     private String  servidor    = "";
     private String  baseDatos = "CusosActualizacion";
@@ -61,7 +61,7 @@ public class ModeloVistaAltaProfesor {
         String sqlInsertProfesor = "";
         try {
             sqlInsertProfesor = "insert into profesor(nombre, ap_paterno, ap_materno, cedula, nivel_max,"
-                + "carrera, correo) values('" + a.getNombre() + "', '" + a.getApPaterno() +"', '" + a.getApMaterno()
+                + "carrera,  correo) values('" + a.getNombre() + "', '" + a.getApPaterno() +"', '" + a.getApMaterno()
                     + "', " + a.getCedula() + ", '" + a.getNivelMax() +"', '" + a.getCarrera() + "', '" + a.getCorreo() + "')";
             ps = getConexion().prepareStatement(sqlInsertProfesor);
             ps.executeUpdate();
@@ -132,7 +132,7 @@ public class ModeloVistaAltaProfesor {
             rs = ps.executeQuery();
             if(rs.next()){
                 if(rs.getInt(1) > 0)
-                    return Color.RED;
+                    return Color.PINK;
                 else
                     return Color.GREEN;
             }
@@ -219,6 +219,8 @@ public class ModeloVistaAltaProfesor {
         } catch (SQLException ex) { }
         return null;
     }
+    
+    
     
     public boolean inscribirProfesor(int id_profesor, int id_curso, String nomCurso, String nomProfesor) {
         PreparedStatement ps;
