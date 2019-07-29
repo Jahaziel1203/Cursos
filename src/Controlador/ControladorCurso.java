@@ -12,7 +12,6 @@ import java.awt.event.MouseListener;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import vista.VistaAltaCurso;
@@ -26,6 +25,7 @@ public class ControladorCurso implements ActionListener, MouseListener{
     private VistaPrincipal prin;
     private VistaAltaCurso view;
     private ModeloVistaAltaCurso modelo;
+    Clock clo;
     
 
     ControladorCurso(VistaAltaCurso login, VistaPrincipal view) {
@@ -35,12 +35,14 @@ public class ControladorCurso implements ActionListener, MouseListener{
         modelo = new ModeloVistaAltaCurso("CursosActualizacion");
         cargarTabla();
         this.view.setModelo(modelo.cargarNombres());
+        pintar();
         
+    }
+
+    private void pintar(){
         TableCellRenderer renderer = new PintarCeldaCur(this.view, this.modelo);
         this.view.getTabla().setDefaultRenderer(Object.class, renderer);
     }
-
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -50,6 +52,8 @@ public class ControladorCurso implements ActionListener, MouseListener{
         String comando  = e.getActionCommand();
         switch (comando) {
             case "Agregar":
+                comprobar();
+                pintar();
                 filaPulsada = this.view.tabla.getSelectedRow();
                 if(filaPulsada>=0) {
                     c = new Curso();
@@ -94,19 +98,172 @@ public class ControladorCurso implements ActionListener, MouseListener{
                     c2.setIdProf(pro2.getId());
                     c2.setAula(this.view.getAulaCombo());
                     
-                    String hIn2 = this.view.getHoraInicio();
-                    String mIn2 = this.view.getMinutoInicio();
-                    String horaInicio2 = hIn2 + ":" + mIn2 + ":" + "00";
+                    String hoIn = this.view.getHoraInicio();
+                    String h = "";
+                    String mi = "";
+                    String form = "";
+                    for(int x = 0; x < hoIn.length(); x++){
+                        if(x == 0 || x == 1){
+                            char letra = hoIn.charAt(x);
+                            h += letra;
+                        }
+                        if(x == 3 || x ==4){
+                            char le = hoIn.charAt(x);
+                            mi += le;
+                        }
+                        if(x == 6 || x ==7){
+                            char l = hoIn.charAt(x);
+                            form += l;
+                        }
+                    }
+                    if(form.equals("PM")){
+                        switch(h){
+                            case "01":
+                                h = "13";
+                            break;
+                            
+                            case "02":
+                                h = "14";
+                            break;
+                            
+                            case "03":
+                                h = "15";
+                            break;
+                            
+                            case "04":
+                                h = "16";
+                            break;
+                            
+                            case "05":
+                                h = "17";
+                            break;
+                            
+                            case "06":
+                                h = "18";
+                            break;
+                            
+                            case "07":
+                                h = "19";
+                            break;
+                            
+                            case "08":
+                                h = "20";
+                            break;
+                            
+                            case "09":
+                                h = "21";
+                            break;
+                            
+                            case "10":
+                                h = "22";
+                            break;
+                            
+                            case "11":
+                                h = "23";
+                            break;
+                            
+                            case "12":
+                                h = "24";
+                            break;
+                        }
+                    }
+                    int hAux = Integer.parseInt(h);
+                    String horaInicio = h + ":" + mi + ":" + "00";
+                    if(hAux >= 7 && hAux <= 19){
+                    c2.sethInicio(horaInicio);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "La hora de inicio debes estar entre las 7 am y 7 pm");
+                        break;
+                    }   
                     
-                    c2.sethInicio(horaInicio2);
-                    String hFin2 = this.view.getHoraFin();
-                    String mFin2 = this.view.getMinutofin();
-                    String horaFin2 = hFin2 + ":" + mFin2 + ":" + "00";
-                    c2.sethFin(horaFin2);
-                    c2.setEstado(c3.getEstado());
-                    this.modelo.updateCurso(c2);
+                    String hoFin = this.view.getHoraFin();
+                    String h1 = "";
+                    String mi1 = "";
+                    String form1 = "";
+                    for(int x = 0; x < hoFin.length(); x++){
+                        if(x == 0 || x == 1){
+                            char letra = hoFin.charAt(x);
+                            h1 += letra;
+                        }
+                        if(x == 3 || x ==4){
+                            char le = hoFin.charAt(x);
+                            mi1 += le;
+                        }
+                        if(x == 6 || x ==7){
+                            char l = hoFin.charAt(x);
+                            form1 += l;
+                        }
+                    }
+                    if(form1.equals("PM")){
+                        switch(h1){
+                            case "01":
+                                h1 = "13";
+                            break;
+                            
+                            case "02":
+                                h1 = "14";
+                            break;
+                            
+                            case "03":
+                                h1 = "15";
+                            break;
+                            
+                            case "04":
+                                h1 = "16";
+                            break;
+                            
+                            case "05":
+                                h1 = "17";
+                            break;
+                            
+                            case "06":
+                                h1 = "18";
+                            break;
+                            
+                            case "07":
+                                h1 = "19";
+                            break;
+                            
+                            case "08":
+                                h1 = "20";
+                            break;
+                            
+                            case "09":
+                                h1 = "21";
+                            break;
+                            
+                            case "10":
+                                h1 = "22";
+                            break;
+                            
+                            case "11":
+                                h1 = "23";
+                            break;
+                            
+                            case "12":
+                                h1 = "24";
+                            break;
+                        }
+                    } 
+                    int h1Aux = Integer.parseInt(h1);
+                    String horaFin = h1 + ":" + mi1 + ":" + "00";
+                    if(h1Aux >= 8 && h1Aux <= 20){
+                    c2.sethFin(horaFin);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "La hora de termino debes estar entre las 8 am y 8 pm");
+                        break;
+                    }  
+                    
+                    if(hAux < h1Aux){
+                        c2.setEstado(c3.getEstado());
+                            modelo.updateCurso(c2);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "La hora de termino no puede ser menor a la de inicio.");
+                        break;
+                    }
+                    
                     m1.closeConexion();
-                } else {
+                } else {  ///Termina el de actualizar ***************************************
                     String nombreCurso = this.view.getNombre();
                     if(nombreCurso.length() == 0){
                         JOptionPane.showMessageDialog(null, "El campo NOMBRE DEL CURSO no debe estar vacío");
@@ -141,7 +298,7 @@ public class ControladorCurso implements ActionListener, MouseListener{
                             mes = "0" + mes;
                         fechaFin = anio + "-" + mes + "-" + dia;
                     }
-                    
+                    c = new Curso();
                     String profRes = this.view.getProfesorResponsable();
                     Profesor p = new Profesor();
                     p.setId(modelo.getIds().get(this.view.getIndiceCurso()));
@@ -149,18 +306,197 @@ public class ControladorCurso implements ActionListener, MouseListener{
                     Profesor p2 = m.selectProfesorNombre(p);
 
                     String aula = this.view.getAulaCombo();
-                    String horaInicio = this.view.getHoraInicio() + ":" + this.view.getMinutoInicio() + ":" + "00";
-                    String horaFin = this.view.getHoraFin() + ":" + this.view.getMinutofin() + ":" + "00";
-                
-                    c = new Curso(nombreCurso, fechaIn, fechaFin, p2.getId(), aula, horaInicio, horaFin);
-                    modelo.insertCurso(c);
+                    
+                    String hoIn = this.view.getHoraInicio();
+                    String h = "";
+                    String mi = "";
+                    String form = "";
+                    for(int x = 0; x < hoIn.length(); x++){
+                        if(x == 0 || x == 1){
+                            char letra = hoIn.charAt(x);
+                            h += letra;
+                        }
+                        if(x == 3 || x ==4){
+                            char le = hoIn.charAt(x);
+                            mi += le;
+                        }
+                        if(x == 6 || x ==7){
+                            char l = hoIn.charAt(x);
+                            form += l;
+                        }
+                    }
+                    if(form.equals("PM")){
+                        switch(h){
+                            case "01":
+                                h = "13";
+                            break;
+                            
+                            case "02":
+                                h = "14";
+                            break;
+                            
+                            case "03":
+                                h = "15";
+                            break;
+                            
+                            case "04":
+                                h = "16";
+                            break;
+                            
+                            case "05":
+                                h = "17";
+                            break;
+                            
+                            case "06":
+                                h = "18";
+                            break;
+                            
+                            case "07":
+                                h = "19";
+                            break;
+                            
+                            case "08":
+                                h = "20";
+                            break;
+                            
+                            case "09":
+                                h = "21";
+                            break;
+                            
+                            case "10":
+                                h = "22";
+                            break;
+                            
+                            case "11":
+                                h = "23";
+                            break;
+                            
+                            case "12":
+                                h = "24";
+                            break;
+                        }
+                    }
+                    int hAux = Integer.parseInt(h);
+                    String horaInicio = h + ":" + mi + ":" + "00";
+                    if(hAux >= 7 && hAux <= 19){
+                    c.sethInicio(horaInicio);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "La hora de inicio debes estar entre las 7 am y 7 pm");
+                        break;
+                    }   
+                    
+                    String hoFin = this.view.getHoraFin();
+                    String h1 = "";
+                    String mi1 = "";
+                    String form1 = "";
+                    for(int x = 0; x < hoFin.length(); x++){
+                        if(x == 0 || x == 1){
+                            char letra = hoFin.charAt(x);
+                            h1 += letra;
+                        }
+                        if(x == 3 || x ==4){
+                            char le = hoFin.charAt(x);
+                            mi1 += le;
+                        }
+                        if(x == 6 || x ==7){
+                            char l = hoFin.charAt(x);
+                            form1 += l;
+                        }
+                    }
+                    if(form1.equals("PM")){
+                        switch(h1){
+                            case "01":
+                                h1 = "13";
+                            break;
+                            
+                            case "02":
+                                h1 = "14";
+                            break;
+                            
+                            case "03":
+                                h1 = "15";
+                            break;
+                            
+                            case "04":
+                                h1 = "16";
+                            break;
+                            
+                            case "05":
+                                h1 = "17";
+                            break;
+                            
+                            case "06":
+                                h1 = "18";
+                            break;
+                            
+                            case "07":
+                                h1 = "19";
+                            break;
+                            
+                            case "08":
+                                h1 = "20";
+                            break;
+                            
+                            case "09":
+                                h1 = "21";
+                            break;
+                            
+                            case "10":
+                                h1 = "22";
+                            break;
+                            
+                            case "11":
+                                h1 = "23";
+                            break;
+                            
+                            case "12":
+                                h1 = "24";
+                            break;
+                        }
+                    }
+                    int h1Aux = Integer.parseInt(h1);
+                    String horaFin = h1 + ":" + mi1 + ":" + "00";
+                    if(h1Aux >= 8 && h1Aux <= 20){
+                    c.sethFin(horaFin);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "La hora de termino debes estar entre las 8 am y 8 pm");
+                        break;
+                    }
+                    
+                    if(hAux < h1Aux){
+                        c = new Curso(nombreCurso, fechaIn, fechaFin, p2.getId(), aula, horaInicio, horaFin);
+                            modelo.insertCurso(c);
+                    
+                        } else{
+                            JOptionPane.showMessageDialog(null, "La hora de termino no puede ser menor a la de inicio.");
+                        break;
+                        }
                     m.closeConexion();
                 }
                 limpia();
                 cargarTabla();
             break;
             
+            case "Hora Fin:":
+                comprobar();
+                
+                clo = new Clock(view, "Hora Fin:", modelo);
+                clo.setBounds(603, 328, 90, 30);
+                clo.setVisible(true);
+            break;
+            
+            case "Hora Inicio:":
+                comprobar();
+                
+                clo = new Clock(view, "Hora Inicio:", modelo);
+                clo.setBounds(603, 293, 90, 30);
+                clo.setVisible(true);
+                
+            break;
+            
             case "Eliminar":
+                comprobar();
+                pintar();
                 filaPulsada = this.view.tabla.getSelectedRow();
                 if(filaPulsada>=0){
                     c = new Curso();
@@ -173,6 +509,7 @@ public class ControladorCurso implements ActionListener, MouseListener{
             break;
             
             case "Fecha Termino:":
+                comprobar();
                 CalendarPane cP = new CalendarPane(view);
                 cP.crearUnCale();
                
@@ -181,6 +518,7 @@ public class ControladorCurso implements ActionListener, MouseListener{
             break;
             
             case "Fecha Inicio:":
+                comprobar();
                 CalendarPane a = new CalendarPane(view);
                 a.crearUnCalendario();
                
@@ -189,6 +527,7 @@ public class ControladorCurso implements ActionListener, MouseListener{
             break;
             
             case "Regresar":
+                comprobar();
                 view.dispose();
                 prin.setVisible(true);
             break;
@@ -199,9 +538,20 @@ public class ControladorCurso implements ActionListener, MouseListener{
         this.view.setNombre("");
         this.view.setProfesorResponsable("");
         this.view.setAulaCombo("01");
+        this.view.setHoraInicio("");
+        this.view.setHoraFin("");
         this.view.fechaInicio.setDate(null);
         this.view.fechaFin.setDate(null);
         this.view.setProfRespon(0);
+        
+        String [] aulas = new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13" };
+        this.view.setModeloAulas(aulas);
+    }
+    
+    private void comprobar(){
+        if( clo != null && clo.isShowing()){
+            clo.dispose();
+        }
     }
     
     protected void cargarTabla(){

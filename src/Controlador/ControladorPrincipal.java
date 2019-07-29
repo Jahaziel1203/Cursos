@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import vista.VistaAltaCurso;
 import vista.VistaAltaProfesor;
+import vista.VistaInscripcionProfesor;
 import vista.VistaPrincipal;
 
 /**
@@ -44,6 +45,13 @@ public class ControladorPrincipal implements ActionListener, MouseListener{
                 VistaAltaProfesor vista = new VistaAltaProfesor();
                 ControladorProfesor c = new ControladorProfesor(vista,view);
                 vista.conectaControlador(c);
+                view.dispose();
+                break;
+                
+            case "Inscribir Profesor":
+                VistaInscripcionProfesor vistaIn = new VistaInscripcionProfesor();
+                ControladorInscripcion con = new ControladorInscripcion(vistaIn,view);
+                vistaIn.conectaControlador(con);
                 view.dispose();
                 break;
         }

@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.CursoProfesor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,6 +19,7 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
+import vista.VistaConsulta;
 
 /**
  *
@@ -33,9 +35,12 @@ public class ControladorProfesor implements ActionListener, MouseListener{
         prin = view;
         this.view = login;
         modelo = new ModeloVistaAltaProfesor("CursosActualizacion");
-        this.view.setModelo(modelo.cargarCursos());
         cargarTabla();
+        pintar();
         
+    }
+    
+    private void pintar(){
         TableCellRenderer renderer = new PintarCeldaProf(this.view, this.modelo);
         this.view.getTabla().setDefaultRenderer(Object.class, renderer);
     }
@@ -48,6 +53,7 @@ public class ControladorProfesor implements ActionListener, MouseListener{
         int filaPulsada;
         switch (comando) {
             case "Aceptar":
+                pintar();
                 String nombre = view.getNombre();
                 int filaSelec = view.tabla.getSelectedRow();
                 
@@ -131,22 +137,8 @@ public class ControladorProfesor implements ActionListener, MouseListener{
                 }
                 limpia();
                 break;
-            
-            case "Salir Del Curso":
-                
-            break;
-            
-            case "Asignar Curso":
-                int id_Curso = modelo.getIds().get(this.view.getIndiceCurso());
-                int id_Profesor = (int) this.view.dtm.getValueAt(this.view.tabla.getSelectedRow(), 0);
-                String nombreCurso = modelo.getNombres().get(this.view.getIndiceCurso());
-                String nombre_Profesor = (String) this.view.dtm.getValueAt(this.view.tabla.getSelectedRow(), 1) + " " +
-                        (String) this.view.dtm.getValueAt(this.view.tabla.getSelectedRow(), 2);
-                modelo.inscribirProfesor(id_Profesor, id_Curso, nombreCurso, nombre_Profesor);
-                
-            break;
-            
             case "Eliminar":
+                pintar();
                 filaPulsada = this.view.tabla.getSelectedRow();
                 
                 if(filaPulsada >= 0){
