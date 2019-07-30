@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class ModeloConsulta {
     private String  host     = "localhost";
     private String  usuario     = "postgres";
-    private String  clave       = "1rv1ng4rc14";
+    private String  clave       = "admi";
     private int     puerto      = 5432;
     private String  servidor    = "";
     private String  baseDatos = "CusosActualizacion";

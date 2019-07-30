@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class ModeloVistaAltaProfesor {
     private String  host     = "localhost";
     private String  usuario     = "postgres";
-    private String  clave       = "1rv1ng4rc14";
+    private String  clave       = "admi";
     private int     puerto      = 5432;
     private String  servidor    = "";
     private String  baseDatos = "CusosActualizacion";
@@ -41,10 +41,9 @@ public class ModeloVistaAltaProfesor {
             System.exit(0); //parar la ejecución
         }
  
-        //Establecer la conexión con el servidor
         try {
             conexion = DriverManager.getConnection(this.servidor,
-                        this.usuario, this.clave);
+            this.usuario, this.clave);
         } catch (SQLException e) {
             System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
             System.exit(0); //parar la ejecución

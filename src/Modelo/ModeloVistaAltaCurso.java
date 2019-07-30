@@ -6,6 +6,7 @@
 package Modelo;
 import Controlador.EnviarCorreo;
 import java.awt.Color;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import vista.VistaAltaCurso;
 public class ModeloVistaAltaCurso {
     private String  host     = "localhost";
     private String  usuario     = "postgres";
-    private String  clave       = "1rv1ng4rc14";
+    private String  clave       = "admi";
     private int     puerto      = 5432;
     private String  servidor    = "";
     private String  baseDatos;
@@ -82,14 +83,34 @@ public class ModeloVistaAltaCurso {
 
             datosCurso[4] = auxiliar.getNombre() + " " + auxiliar.getApPaterno() + " " + auxiliar.getApMaterno();
             datosCurso[5] = a.getAula();
-            
-            //EnviarCorreo en1 = new EnviarCorreo();
-            //en1.correoMasivo(datosCurso);
+                //******************************************************************************************************************************************
+            if(verificarInternet()) {
+                EnviarCorreo en1 = new EnviarCorreo();
+                en1.correoMasivo(datosCurso);
+            }
+                //******************************************************************************************************************************************
             return true;
         } catch(SQLException exception) {
             JOptionPane.showMessageDialog(null, "ERROR EN EL GUARDADO:  " + exception);
         }
         return false;
+    }
+    
+    
+    //******************************************************************************************************************************************
+    public boolean verificarInternet() {
+        String dirWeb = "www.lineadecodigo.com";
+        int puerto = 80;
+        
+        try{
+            Socket s = new Socket(dirWeb, puerto);
+            if(s.isConnected()){
+                return true;
+            } 
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
     
     public boolean deleteCurso(Curso l){
@@ -163,10 +184,6 @@ public class ModeloVistaAltaCurso {
         }
         return null;
     }
-    
-    // Modificado **************************************************************************************************************************************
-    
-    //Metodo recien agregado
     
     /**
      * Método en cargado de determinar que aulas se van a eliminar del 
