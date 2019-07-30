@@ -29,12 +29,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         Icon fondo = new ImageIcon(imagen.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT));
         Imagen.setIcon(fondo);
         cerrar();
-        this.setBounds(200, 200, 475, 420);
-        //btnAgregarCurso.setLocation(24, 240);
-        //btnAgregarProfesor.setLocation(225,240);
-        btnInscribir.setSize(140, 30);
-        //btnConsultarCurso.setSize(127, 32);
-        //btnConsultarProfesor.setSize(150,32);
+        this.setBounds(200, 200, 475, 470);
+        btnAgregarCurso.setBounds(50, 325, 165, 32);
+        btnAgregarProfesor.setBounds(240, 325, 165, 32);
+        btnInscribir.setBounds(50, 370, 165, 32);
+        btnCalificacion.setBounds(240, 370, 165, 32);
+        this.setTitle("Sistema de gestión de aprendizaje online");
         this.repaint();
         this.setVisible(true);    
     }
@@ -71,6 +71,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnAgregarProfesor = new javax.swing.JButton();
         Imagen = new javax.swing.JLabel();
         btnInscribir = new javax.swing.JButton();
+        btnCalificacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -91,11 +92,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregarCurso);
-        btnAgregarCurso.setBounds(10, 330, 120, 32);
+        btnAgregarCurso.setBounds(20, 330, 120, 29);
 
         btnAgregarProfesor.setText("Agregar Profesor");
+        btnAgregarProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProfesorActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAgregarProfesor);
-        btnAgregarProfesor.setBounds(150, 330, 140, 32);
+        btnAgregarProfesor.setBounds(290, 330, 140, 29);
 
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ESCUELA.png"))); // NOI18N
         Imagen.setText("jLabel2");
@@ -104,7 +110,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         btnInscribir.setText("Inscribir Profesor");
         getContentPane().add(btnInscribir);
-        btnInscribir.setBounds(310, 330, 130, 32);
+        btnInscribir.setBounds(20, 370, 155, 29);
+
+        btnCalificacion.setText("Capturar Calificación");
+        btnCalificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalificacionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCalificacion);
+        btnCalificacion.setBounds(250, 370, 180, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,6 +127,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCursoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarCursoActionPerformed
+
+    private void btnAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProfesorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarProfesorActionPerformed
+
+    private void btnCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalificacionActionPerformed
 
     public void conectaControlador(ControladorPrincipal c ){
  
@@ -124,17 +147,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 btnInscribir.addActionListener(c);
                 btnInscribir.setActionCommand("Inscribir Profesor");
                 
-                //btnConsultarCurso.addActionListener(c);
-		//btnConsultarCurso.setActionCommand("Consultar Curso");
-                
-                //btnConsultarProfesor.addActionListener(c);
-		//btnConsultarProfesor.setActionCommand("Consultar Profesor");
-                
-                //tConductor.addMouseListener(c);
- 
-        //tabla.addMouseListener(c);
-        //sólo se permite pulsar una fila a la vez.
-        //tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                btnCalificacion.addActionListener(c);
+                btnCalificacion.setActionCommand("Capturar calificacion");
     }
     
     /**
@@ -176,6 +190,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Imagen;
     private javax.swing.JButton btnAgregarCurso;
     private javax.swing.JButton btnAgregarProfesor;
+    private javax.swing.JButton btnCalificacion;
     private javax.swing.JButton btnInscribir;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

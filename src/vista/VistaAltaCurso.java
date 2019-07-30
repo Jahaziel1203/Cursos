@@ -40,6 +40,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setBounds(200, 200, 700, 500);
+        this.setTitle("Sistema de gestión de aprendizaje online");
         
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(15, 200, 650, 190);

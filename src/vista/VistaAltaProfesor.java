@@ -38,6 +38,7 @@ public class VistaAltaProfesor extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocation(200, 200);
+        this.setTitle("Sistema de gestión de aprendizaje online");
         
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(15, 210, 747, 200);

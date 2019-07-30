@@ -50,7 +50,7 @@ public class VistaConsulta extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 100, 680, 200); //100,6802,200
         
         this.setLocation(200, 200);
-        
+        this.setTitle("Sistema de gestión de aprendizaje online");
         this.setVisible(true);
     }
     

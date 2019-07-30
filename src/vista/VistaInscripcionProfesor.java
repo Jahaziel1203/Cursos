@@ -8,11 +8,9 @@ package vista;
 import Controlador.ControladorInscripcion;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -84,6 +82,7 @@ public class VistaInscripcionProfesor extends javax.swing.JFrame {
         
         this.setLocation(200, 200);
         this.setVisible(true);
+        this.setTitle("Sistema de gestión de aprendizaje online");
         this.setResizable(false);
     }
 
@@ -158,7 +157,7 @@ public class VistaInscripcionProfesor extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonInscribir)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
