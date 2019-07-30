@@ -51,6 +51,17 @@ CREATE TABLE Profesor_Curso(
 	references Curso(id_curso)
 );
 
+CREATE TABLE Calificaciones(
+	Id_profesor int not null,
+	Id_curso int not null,
+	Calificacion int not null,
+	Constraint fk_idProfr foreign key (Id_profesor)
+	references Profesor(id_profesor),
+	Constraint fk_idCurso foreign key (Id_curso)
+	references Curso(id_curso),
+	Constraint ck_Calif check (Calificacion >= 0 and Calificacion <= 100)
+);
+
 insert into profesor ("nombre", "ap_paterno", "ap_materno", "cedula", 
 					 "nivel_max", "carrera", "area", "correo") 
 					 values ('Juan', 'Perez', 'Hernandez', 9876544, 
