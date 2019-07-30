@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import vista.VistaAltaCurso;
 import vista.VistaAltaProfesor;
+import vista.VistaCalificaciones;
 import vista.VistaInscripcionProfesor;
 import vista.VistaPrincipal;
 
@@ -54,6 +55,14 @@ public class ControladorPrincipal implements ActionListener, MouseListener{
                 vistaIn.conectaControlador(con);
                 view.dispose();
                 break;
+                
+            case "Capturar calificacion":
+                VistaCalificaciones vistaCalif = new VistaCalificaciones();
+                ControladorCalificaciones concal = new ControladorCalificaciones(vistaCalif, view);
+                vistaCalif.conectaControlador(concal);
+                view.dispose();
+                break;
+                    
         }
     }
 
@@ -81,5 +90,4 @@ public class ControladorPrincipal implements ActionListener, MouseListener{
     public void mouseExited(MouseEvent me) {
 //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
